@@ -13,5 +13,6 @@ RUN apk --update add ruby build-base ruby-dev \
       ruby-bigdecimal ruby-bundler ruby-rdoc ruby-io-console ruby-irb \
 &&  rm -rf /var/cache/apk/*
 
+RUN export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 RUN bundle config build.nokogiri --use-system-libraries
 
