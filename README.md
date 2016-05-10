@@ -51,19 +51,11 @@ However you could need specific version or want to follow version from Gemfile, 
 # installing *dev stuff
 apk-install ruby-dev build-base
 
-bundle config build.nokogiri --use-system-libraries
 bundle install
+# or you could install gem directly
+gem install nokogiri -- --use-system-libraries
 
 # removing *dev stuff
 apk del ruby-dev build-base
 ```
 
-OR
-
-```bash
-apk-install ruby-dev build-base
-
-gem install nokogiri -- --use-system-libraries
-
-apk del ruby-dev build-base
-```
