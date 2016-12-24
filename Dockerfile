@@ -1,10 +1,10 @@
 # vim:set ft=dockerfile:
-FROM gliderlabs/alpine:3.4
+FROM alpine:edge
 
 MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
 
 RUN apk --update add ruby build-base ruby-dev \
-      curl wget openssl ca-certificates \
+      curl wget libressl ca-certificates \
       less libstdc++ pcre libffi libxml2 libxslt zlib \
       ruby-bigdecimal ruby-bundler ruby-rdoc ruby-io-console ruby-irb \
 \
