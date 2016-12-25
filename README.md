@@ -1,20 +1,23 @@
-Ruby 2.2 Docker image
-=====================
+Ruby Docker image
+=================
 
 The smallest Docker image with Ruby 2.2 (~27MB) https://hub.docker.com/r/andrius/alpine-ruby/
 
-This image is based on Alpine Linux image, which is only a 5MB image, and contains
-[Ruby 2.2](https://www.ruby-lang.org/en/).
+This image is based on Alpine Linux image, which is only a 5MB image.
 
 Total size of this image is only:
 
-[![](https://badge.imagelayers.io/andrius/alpine-ruby:latest.svg)](https://imagelayers.io/?images=andrius/alpine-ruby:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/andrius/alpine-ruby.svg)](https://microbadger.com/images/andrius/alpine-ruby "Get your own image badge on microbadger.com")
 
 Usage Example
 -------------
 
+```
+docker run -ti --rm andrius/alpine-ruby:latest ruby -v
+```
+
 ```bash
-$ docker run -ti --rm andrius/alpine-ruby ruby -e "puts 'Hello, world!'"
+docker run -ti --rm andrius/alpine-ruby ruby -e "puts 'Hello, world!'"
 ```
 
 Once you have run this command you will get printed 'Hello World' from Ruby!
@@ -33,7 +36,7 @@ Sometimes you could need to install various gems, where development packages is 
 Usually it's enough to install following packages:
 
 ```bash
-apk-install ruby-dev build-base libxml2-dev libxslt-dev pcre-dev libffi-dev mariadb-dev postgresql-dev
+apk add --update ruby-dev build-base libxml2-dev libxslt-dev pcre-dev libffi-dev mariadb-dev postgresql-dev
 ```
 
 About nokogiri installation
@@ -42,14 +45,14 @@ About nokogiri installation
 In order to install nokogiri, you could use alpine's version:
 
 ```bash
-apk-install ruby-nokogiri
+apk add --update ruby-nokogiri
 ```
 
 However you could need specific version or want to follow version from Gemfile, you could install it:
 
 ```bash
 # installing *dev stuff
-apk-install ruby-dev build-base
+apk add --update ruby-dev build-base
 
 bundle install
 # or you could install gem directly
