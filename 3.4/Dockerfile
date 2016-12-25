@@ -1,11 +1,12 @@
 # vim:set ft=dockerfile:
-FROM alpine:latest
+FROM alpine:3.4
 
 MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
 
-RUN apk add --update libressl libressl-dev ca-certificates \
-&& apk add ruby ruby-bigdecimal ruby-bundler ruby-rdoc ruby-io-console ruby-irb \
+RUN apk add --update \
+      ruby ruby-bigdecimal ruby-bundler ruby-rdoc ruby-io-console ruby-irb \
       libstdc++ pcre libffi libxml2 libxslt zlib \
+      openssl openssl-dev ca-certificates \
 && gem install foreman --no-rdoc --no-ri \
 && gem cleanup \
 && rm -rf /var/cache/apk/*
