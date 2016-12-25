@@ -3,14 +3,17 @@ FROM alpine:latest
 
 MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
 
+# maybe we want also add:
+# ruby-rdoc ruby-io-console ruby-irb
 RUN apk add --update \
-      ruby ruby-bigdecimal ruby-bundler ruby-rdoc ruby-io-console ruby-irb \
-      libstdc++ pcre libffi libxml2 libxslt zlib \
-      openssl openssl-dev ca-certificates \
-&& gem install foreman --no-rdoc --no-ri \
-&& gem cleanup \
+      ruby ruby-bigdecimal ruby-bundler \
+&&  apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main/ \
+      ca-certificates libressl libressl-dev \
 && rm -rf /var/cache/apk/*
 
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 RUN bundle config build.nokogiri --use-system-libraries
+
+RUN gem install foreman --no-rdoc --no-ri \
+&& gem cleanup
 
