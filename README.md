@@ -12,6 +12,17 @@ Total size of this image is only:
 
 This image is based on Alpine Linux image, which is only a 5MB image.
 
+Support
+-------
+
+This is minimal image with only necessary packages, to keep your app working in production. Image build by using only official applications from Alpine linux, and supported AS IS.
+
+For development purposes it's better to use official ruby image based on debian or same Alpine linux, one of them:
+
+- `docker pull ruby:alpine`
+- `docker pull ruby:slim`
+- `docker pull ruby:latest`
+
 Usage Example
 -------------
 

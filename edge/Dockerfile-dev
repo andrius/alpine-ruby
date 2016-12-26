@@ -1,8 +1,0 @@
-# vim:set ft=dockerfile:
-FROM andrius/alpine-ruby:edge
-
-MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
-
-RUN apk add --update less curl wget git ruby-dev build-base \
-&& rm -rf /var/cache/apk/*
-
