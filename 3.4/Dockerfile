@@ -15,6 +15,6 @@ ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle config git.allow_insecure true
 
-RUN gem install foreman --no-rdoc --no-ri \
+RUN gem install json foreman --no-rdoc --no-ri \
 && gem cleanup \
 && rm -rf /usr/lib/ruby/gems/*/cache/*
