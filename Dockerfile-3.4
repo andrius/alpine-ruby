@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM alpine:latest
+FROM alpine:3.4
 
 MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
 
@@ -8,24 +8,29 @@ ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 ADD gemrc /root/.gemrc
 
 RUN apk update \
+\
 && apk add ruby \
            ruby-bigdecimal \
            ruby-bundler \
            ruby-io-console \
            ruby-irb \
-           ca-certificates \
-           libressl \
-&& apk add --virtual build-dependencies \
            build-base \
            ruby-dev \
+&& apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main/ \
+           ca-certificates \
+           libressl \
            libressl-dev \
 \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle config git.allow_insecure true \
-&& gem install json --no-rdoc --no-ri \
+&& gem install --no-rdoc --no-ri \
+               json \
+               foreman \
 \
 && gem cleanup \
-&& apk del build-dependencies \
+&& apk del build-base \
+           ruby-dev \
+           libressl-dev \
 && rm -rf /usr/lib/ruby/gems/*/cache/* \
           /var/cache/apk/* \
           /tmp/* \
