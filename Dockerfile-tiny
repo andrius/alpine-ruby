@@ -1,0 +1,31 @@
+# vim:set ft=dockerfile:
+FROM alpine:latest
+
+LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
+
+ENV NOKOGIRI_USE_SYSTEM_LIBRARIES 1
+
+COPY gemrc /root/.gemrc
+
+RUN apk add --update \
+      ruby \
+      ruby-bigdecimal \
+      ruby-io-console \
+      ruby-irb \
+      ca-certificates \
+      libressl \
+      less \
+ \
+ && apk add --virtual .build-dependencies \
+      ruby-bundler \
+      build-base \
+      ruby-dev \
+      libressl-dev \
+ && bundle config build.nokogiri --use-system-libraries \
+ && bundle config git.allow_insecure true \
+ \
+ && apk del .build-dependencies \
+ && rm -rf /usr/lib/ruby/gems/*/cache/* \
+          /var/cache/apk/* \
+          /tmp/* \
+          /var/tmp/*

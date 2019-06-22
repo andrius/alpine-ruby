@@ -1,0 +1,11 @@
+# vim:set ft=dockerfile:
+FROM andrius/alpine-ruby:tiny
+
+LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
+
+RUN gem install bundler -v '~> 1.0' \
+ \
+ && rm -rf /usr/lib/ruby/gems/*/cache/* \
+           /var/cache/apk/* \
+           /tmp/* \
+           /var/tmp/*
