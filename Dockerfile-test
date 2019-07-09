@@ -3,7 +3,7 @@ FROM andrius/alpine-ruby:tiny
 
 LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
 
-RUN gem install bundler -v '~> 1.0' \
+RUN gem install bundler:'~> 1.0' \
  \
  && rm -rf /usr/lib/ruby/gems/*/cache/* \
            /var/cache/apk/* \
