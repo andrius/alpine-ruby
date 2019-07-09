@@ -19,7 +19,6 @@ RUN apk update \
            build-base \
            ruby-dev \
            libressl-dev \
-\
 && gem install bundler --no-rdoc --no-ri || apk add ruby-bundler \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle config git.allow_insecure true \

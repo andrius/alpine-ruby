@@ -10,23 +10,22 @@ ADD gemrc /root/.gemrc
 RUN apk update \
 && apk add ruby \
            ruby-bigdecimal \
-           ruby-bundler \
            ruby-io-console \
            ruby-irb \
            ca-certificates \
            libressl \
            less \
-&& apk add --virtual build-dependencies \
+&& apk add --virtual .build-dependencies \
            build-base \
            ruby-dev \
            libressl-dev \
-\
+&& gem install bundler --no-rdoc --no-ri || apk add ruby-bundler \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle config git.allow_insecure true \
 && gem install json --no-rdoc --no-ri \
 \
 && gem cleanup \
-&& apk del build-dependencies \
+&& apk del .build-dependencies \
 && rm -rf /usr/lib/ruby/gems/*/cache/* \
           /var/cache/apk/* \
           /tmp/* \

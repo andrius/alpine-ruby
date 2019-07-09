@@ -1,7 +1,7 @@
 Ruby Docker image
 =================
 
-The smallest Docker image with Ruby.
+The smallest Docker image with Ruby, is based on Alpine Linux image, which is only a 5MB image. It does only have ruby and bundler (except image with `tiny` tag).
 
 Total size of this image is only:
 
@@ -10,18 +10,18 @@ Total size of this image is only:
 - [Github link](//github.com/andrius/alpine-ruby/)
 - [Docker hub link](//hub.docker.com/r/andrius/alpine-ruby/)
 
-This image is based on Alpine Linux image, which is only a 5MB image.
 
 Support
 -------
 
-This is minimal image with only necessary packages, to keep your app working in production. Image build by using only official applications from Alpine linux, and supported AS IS.
+This is minimal image with only necessary packages, to run your app in production. Image build by using only official applications from Alpine linux, and supported AS IS.
 
-For development purposes it's better to use official ruby image based on debian or same Alpine linux, one of them:
+Tags
+----
 
-- `docker pull ruby:alpine`
-- `docker pull ruby:slim`
-- `docker pull ruby:latest`
+Tags referring Alpine ruby version, not ruby version.
+
+`glibc-latest` is an version that contains glibc to enable proprietary projects compiled against glibc and based on latest [frolvlad/alpine-glibc](https://hub.docker.com/r/frolvlad/alpine-glibc).
 
 Usage Example
 -------------
@@ -39,12 +39,6 @@ docker run -ti --rm andrius/alpine-ruby ruby -e "puts 'Hello, world!'"
 ```
 
 Once you have run this command you will get printed 'Hello World' from Ruby!
-
-What's included
----------------
-
-- bundler
-- foreman
 
 Development packages
 --------------------
@@ -81,4 +75,3 @@ gem install nokogiri -- --use-system-libraries
 # removing *dev stuff
 apk del ruby-dev build-base
 ```
-
