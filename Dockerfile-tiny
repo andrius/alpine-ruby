@@ -9,6 +9,7 @@ COPY gemrc /root/.gemrc
 
 RUN apk add --update \
       ruby \
+      ruby-etc \
       ruby-bigdecimal \
       ruby-io-console \
       ruby-irb \
