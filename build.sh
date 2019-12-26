@@ -16,6 +16,7 @@ else
         3.8 \
         3.9 \
         3.10 \
+        3.11 \
         latest \
         tiny \
         edge \
@@ -33,8 +34,7 @@ for TAG in "${TAGS[@]}"; do
   docker rmi -f ${IMAGE}
 done
 
-docker rmi -f \
-              alpine:2.7 \
+docker rmi -f alpine:2.7 \
               alpine:3.1 \
               alpine:3.2 \
               alpine:2.7 \
@@ -46,6 +46,7 @@ docker rmi -f \
               alpine:3.8 \
               alpine:3.9 \
               alpine:3.10 \
+              alpine:3.11 \
               alpine:latest \
               alpine:edge \
               frolvlad/alpine-glibc
