@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -x
 
 if [ "$@" != "" ]; then
   TAGS=("$@")
@@ -17,6 +17,8 @@ else
         3.9 \
         3.10 \
         3.11 \
+        3.12 \
+        3.13 \
         latest \
         tiny \
         edge \
@@ -29,8 +31,8 @@ for TAG in "${TAGS[@]}"; do
   DOCKERFILE="Dockerfile-${TAG}"
   echo "Builgind image ${IMAGE} from ${DOCKERFILE}"
 
-  docker build --pull --force-rm --tag ${IMAGE} --file ./${DOCKERFILE} .
-  docker push ${IMAGE}
+  docker build --pull --force-rm --tag ${IMAGE} --file ./${DOCKERFILE} . && \
+  docker push ${IMAGE} && \
   docker rmi -f ${IMAGE}
 done
 
@@ -47,6 +49,8 @@ docker rmi -f alpine:2.7 \
               alpine:3.9 \
               alpine:3.10 \
               alpine:3.11 \
+              alpine:3.12 \
+              alpine:3.13 \
               alpine:latest \
               alpine:edge \
               frolvlad/alpine-glibc
