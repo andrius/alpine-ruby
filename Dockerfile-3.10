@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM alpine:3.10
+FROM alpine:3.16.7
 
 LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
 
