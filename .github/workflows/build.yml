@@ -5,21 +5,25 @@ on:
   workflow_dispatch:
   # schedule:
   #   - cron: '0 0 * * *' # runs every day at midnight
+#
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.repository }}-${{ github.workflow_ref }}-${{ matrix.alpine_version }}-build
+      cancel-in-progress: false
+    timeout-minutes: 60
     strategy:
+      max-parallel: 64
+      fail-fast: false
       matrix:
         alpine_version:
-          - 2.7
-          - 3.1
-          - 3.2
-          - 3.3
-          - 3.4
-          - 3.5
-          - 3.6
-          - 3.7
+          - latest
+          - edge
           - 3.8
           - 3.9
           - 3.10
@@ -32,8 +36,6 @@ jobs:
           - 3.17
           - 3.18
           - 3.19
-          - latest
-          - edge
 
     steps:
       - name: Check out code
@@ -43,22 +45,36 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+        run: docker login -u andrius -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push Image
+      - name: Build and push image
         run: |
           if [ -f "Dockerfile-${{ matrix.alpine_version }}" ]; then
-            DOCKERFILE=Dockerfile-${{ matrix.alpine_version }}
+            DOCKERFILE="Dockerfile-${{ matrix.alpine_version }}"
           else
-            DOCKERFILE=Dockerfile
+            DOCKERFILE="Dockerfile"
           fi
 
           docker buildx build \
             --push \
-            --pull \
-            --quiet \
             --platform linux/amd64,linux/arm64 \
             --tag andrius/alpine-ruby:${{ matrix.alpine_version }} \
             --build-arg ALPINE_VERSION=${{ matrix.alpine_version }} \
-            --file $DOCKERFILE
+            --file $DOCKERFILE \
+            .
+
+      - name: Build and push glibc image
+        run: |
+          if [ -f "Dockerfile-${{ matrix.alpine_version }}" ]; then
+            DOCKERFILE="Dockerfile-glibc-${{ matrix.alpine_version }}"
+          else
+            DOCKERFILE="Dockerfile-glibc"
+          fi
+
+          docker buildx build \
+            --push \
+            --platform linux/amd64,linux/arm64 \
+            --tag andrius/alpine-ruby:${{ matrix.alpine_version }} \
+            --build-arg ALPINE_VERSION=${{ matrix.alpine_version }} \
+            --file $DOCKERFILE \
             .
