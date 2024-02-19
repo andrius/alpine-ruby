@@ -73,7 +73,7 @@ jobs:
 
           docker buildx build \
             --push \
-            --platform linux/amd64,linux/arm64 \
+            --platform linux/amd64 \
             --tag andrius/alpine-ruby:${{ matrix.alpine_version }} \
             --build-arg ALPINE_VERSION=${{ matrix.alpine_version }} \
             --file $DOCKERFILE \

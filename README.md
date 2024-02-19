@@ -1,30 +1,19 @@
-Ruby Docker image
-=================
+# Ruby Docker image
 
-The smallest Docker image with Ruby, is based on Alpine Linux image, which is only a 5MB image. It does only have ruby and bundler (except image with `tiny` tag).
-
-Total size of this image is only:
-
-[![](https://images.microbadger.com/badges/image/andrius/alpine-ruby.svg)](https://microbadger.com/images/andrius/alpine-ruby "Get your own image badge on microbadger.com")
+The smallest Docker image with Ruby, is based on Alpine Linux image, which is only a 5MB image. It does only include ruby and bundler gem.
 
 - [Github link](//github.com/andrius/alpine-ruby/)
 - [Docker hub link](//hub.docker.com/r/andrius/alpine-ruby/)
 
-
-Support
--------
+## Support
 
 This is minimal image with only necessary packages, to run your app in production. Image build by using only official applications from Alpine linux, and supported AS IS.
 
-Tags
-----
+## Tags
 
 Tags referring Alpine ruby version, not ruby version.
 
-`glibc-latest` is an version that contains glibc to enable proprietary projects compiled against glibc and based on latest [frolvlad/alpine-glibc](https://hub.docker.com/r/frolvlad/alpine-glibc).
-
-Usage Example
--------------
+## Usage Example
 
 Check ruby version:
 
@@ -40,8 +29,7 @@ docker run -ti --rm andrius/alpine-ruby ruby -e "puts 'Hello, world!'"
 
 Once you have run this command you will get printed 'Hello World' from Ruby!
 
-Development packages
---------------------
+## Development packages
 
 Sometimes you could need to install various gems, where development packages is mandatory.
 
@@ -53,8 +41,7 @@ apk add --update ruby-dev build-base \
   mariadb-dev postgresql-dev
 ```
 
-About nokogiri installation
----------------------------
+## About nokogiri installation
 
 In order to install nokogiri, you could use alpine's version:
 
